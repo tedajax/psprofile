@@ -1,3 +1,5 @@
+# Place at <path to cmder>/cmder/config/user_profile.ps1
+# Typically ~/bin/cmder/config/user_profile.ps1
 # Use this file to run your own startup commands
 
 ## Prompt Customization
@@ -89,15 +91,17 @@ function Enable-VCEnv($version) {
     cmd /c "$vcvarsall_path amd64&set" |
     ForEach-Object {
         if ($_ -match "=") {
-            $v = $_.split("=") set-item -force -path "ENV:\$($v[0])" -value "$($v[1])"
+            $v = $_.split("=")
+            set-item -force -path "ENV:\$($v[0])" -value "$($v[1])"
         }
         Write-Host $_
     }
 }
 
-function Get-GitStatus() { git status }
+function Get-Git-Status() { git status }
 function p8() { Push-Location $env:PICO8_DIR }
 
 $env:PICO8_DIR = "$env:APPDATA\pico-8\carts"
 
-Set-Alias gs Get-GitStatus
+Set-Alias subl 'C:\Program Files\Sublime Text 3\sublime_text.exe'
+Set-Alias gs Get-Git-Status
